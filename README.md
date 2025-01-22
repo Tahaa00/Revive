@@ -44,14 +44,8 @@ Revive is a web application designed to provide first aid assistance by guiding 
 
 ## Deployment
 The application is deployed on Render. You can access it at the following URL:
-[Your Render App URL](https://your-app-name.onrender.com)
+[Your Render App URL](https://rev1ve.onrender.com)
 
 ## Credits
-- Developed by [Your Name]
+- Developed by QU E404
 - Inspired by various first aid resources and guidelines.
-
-## License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Demo Video
-A demo video showcasing the application can be found [here](link-to-your-demo-video).
