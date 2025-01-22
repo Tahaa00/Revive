@@ -102,8 +102,6 @@ def follow_up():
     answer = request.form.get('answer')
     
     # Logic to determine the solution based on the answer
-    # You can use a similar structure as before to get the solution
-    # For example, you can use a dictionary or if-else statements to determine the solution
     if answer == 'yes':
         solution = "You might need to see a doctor. Please consult a healthcare professional."
     else:
