@@ -4,110 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Revive - First Aid Help</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            color: #333333;
-            margin: 0;
-            padding: 0;
-        }
-        header {
-            background-color: #ff4d4d;
-            color: #ffffff;
-            padding: 10px 0;
-            text-align: center;
-        }
-        h1, h2 {
-            margin: 0;
-        }
-        #symptom-selection, #questionnaire, #solution {
-            margin: 20px;
-            padding: 20px;
-            border: 1px solid #ff4d4d;
-            border-radius: 5px;
-        }
-        button {
-            background-color: #ff4d4d;
-            color: #ffffff;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-        button:hover {
-            background-color: #e60000;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
         <h1>Revive</h1>
         <p>Reviving humanity one step at a time</p>
     </header>
-    <div id="symptom-selection">
-        <h2>Select a Symptom</h2>
-        <select id="symptom-list">
-            <option value="">--Select a Symptom--</option>
-            {% for symptom in symptoms %}
-            <option value="{{ symptom }}">{{ symptom }}</option>
-            {% endfor %}
-        </select>
-        <button onclick="getQuestions()">Next</button>
-    </div>
-
-    <div id="questionnaire" style="display:none;">
-        <h2>Answer the Questions</h2>
-        <div id="questions"></div>
-        <button onclick="getSolution()">Get Solution</button>
-    </div>
-
-    <div id="solution" style="display:none;">
-        <h2>Solution</h2>
-        <p id="solution-text"></p>
-    </div>
-
-    <script>
-        function getQuestions() {
-            const symptom = document.getElementById('symptom-list').value;
-            if (!symptom) return alert('Please select a symptom.');
-
-            fetch('/questions', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({symptom})
-            })
-            .then(response => response.json())
-            .then(data => {
-                const questionsDiv = document.getElementById('questions');
-                questionsDiv.innerHTML = '';
-                data.forEach((q, index) => {
-                    const questionDiv = document.createElement('div');
-                    questionDiv.innerHTML = `<p>${q.question}</p>`;
-                    q.answers.forEach(answer => {
-                        questionDiv.innerHTML += `<input type="radio" name="q${index}" value="${answer}"> ${answer}<br>`;
-                    });
-                    questionsDiv.appendChild(questionDiv);
-                });
-                document.getElementById('symptom-selection').style.display = 'none';
-                document.getElementById('questionnaire').style.display = 'block';
-            });
-        }
-
-        function getSolution() {
-            const symptom = document.getElementById('symptom-list').value;
-            fetch('/solution', {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({symptom})
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('solution-text').innerText = data.solution;
-                document.getElementById('questionnaire').style.display = 'none';
-                document.getElementById('solution').style.display = 'block';
-            });
-        }
-    </script>
+    <main>
+        <section id="symptom-selection">
+            <h2>Select a Symptom</h2>
+            <form method="post">
+                <select name="symptom" required>
+                    <option value="" disabled selected>Select a symptom</option>
+                    {% for symptom in symptoms %}
+                    <option value="{{ symptom }}">{{ symptom }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit">Next</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Revive. All rights reserved.</p>
+    </footer>
 </body>
 </html> 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Follow-up Questions</title>
+</head>
+<body>
+    <h1>{{ symptom | capitalize }}</h1>
+    <form method="post">
+        <p>{{ question }}</p>
+        {% for answer in answers %}
+        <input type="radio" name="answer" value="{{ answer }}" required> {{ answer }}<br>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html> 
