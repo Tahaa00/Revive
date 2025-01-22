@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
+import os  # Import the os module
 
 app = Flask(__name__)
 
@@ -110,4 +111,6 @@ def follow_up():
     return render_template('solution.html', solution=solution)
 
 if __name__ == '__main__':
-    app.run(debug=True) 
+    # Bind to the PORT environment variable
+    port = int(os.environ.get("PORT", 5000))  # Default to 5000 if PORT is not set
+    app.run(host='0.0.0.0', port=port)  # Bind to all interfaces 
