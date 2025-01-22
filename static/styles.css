@@ -1,6 +1,6 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f4f8;
     color: #333;
     margin: 0;
     padding: 0;
@@ -14,6 +14,12 @@ header {
     color: #fff;
     padding: 20px;
     text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
 }
 
 main {
@@ -26,18 +32,29 @@ main {
 
 section {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h2 {
+    color: #ff4d4d;
 }
 
 select, button {
     width: 100%;
-    padding: 10px;
-    margin-top: 10px;
+    padding: 12px;
+    margin-top: 15px;
     border-radius: 5px;
     border: 1px solid #ddd;
     font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+select:focus, button:focus {
+    border-color: #ff4d4d;
 }
 
 button {
@@ -56,5 +73,15 @@ footer {
     background-color: #333;
     color: #fff;
     text-align: center;
-    padding: 10px;
+    padding: 15px;
+}
+
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em;
+    }
+
+    section {
+        padding: 20px;
+    }
 } 

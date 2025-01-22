@@ -3,15 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Follow-Up Question</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
-    <h1>Follow-Up Question</h1>
-    <form method="post">
-        <p>{{ question }}</p>
-        {% for answer, solution in answers.items() %}
-        <input type="radio" name="answer" value="{{ answer }}" required> {{ answer }}<br>
-        {% endfor %}
-        <button type="submit">Submit</button>
-    </form>
+    <header>
+        <h1>Revive</h1>
+    </header>
+    <main>
+        <section>
+            <h2>Follow-Up Question</h2>
+            <form method="post" action="{{ url_for('follow_up') }}">
+                <p>{{ question }}</p>
+                {% for answer, solution in answers.items() %}
+                <input type="radio" name="answer" value="{{ answer }}" required> {{ answer }}<br>
+                {% endfor %}
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 Revive. All rights reserved.</p>
+    </footer>
 </body>
 </html> 

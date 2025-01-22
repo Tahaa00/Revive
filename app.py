@@ -96,5 +96,20 @@ def questions(symptom):
 
     return render_template('questions.html', symptom=symptom, question=questions[0]['question'], answers=questions[0]['answers'].keys())
 
+@app.route('/follow_up', methods=['POST'])
+def follow_up():
+    # Get the answer from the follow-up question
+    answer = request.form.get('answer')
+    
+    # Logic to determine the solution based on the answer
+    # You can use a similar structure as before to get the solution
+    # For example, you can use a dictionary or if-else statements to determine the solution
+    if answer == 'yes':
+        solution = "You might need to see a doctor. Please consult a healthcare professional."
+    else:
+        solution = "You can try resting and monitoring your symptoms."
+
+    return render_template('solution.html', solution=solution)
+
 if __name__ == '__main__':
     app.run(debug=True) 
