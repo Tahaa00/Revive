@@ -9,8 +9,20 @@ symptoms_data = {
             {
                 'question': 'Is the headache severe?',
                 'answers': {
-                    'yes': 'You might have a migraine. Consider seeing a doctor.',
-                    'no': 'Try resting and drinking water.'
+                    'yes': {
+                        'follow_up': 'Do you have any visual disturbances (e.g., blurriness, flashing lights)?',
+                        'follow_up_answers': {
+                            'yes': 'You might have a migraine. Consider seeing a doctor.',
+                            'no': 'Try resting and drinking water.'
+                        }
+                    },
+                    'no': {
+                        'follow_up': 'Have you experienced nausea or vomiting?',
+                        'follow_up_answers': {
+                            'yes': 'Consider consulting a healthcare professional.',
+                            'no': 'Try to stay hydrated and rest.'
+                        }
+                    }
                 }
             }
         ]
@@ -20,8 +32,43 @@ symptoms_data = {
             {
                 'question': 'Do you have chills?',
                 'answers': {
-                    'yes': 'You might have the flu. Consider seeing a doctor.',
-                    'no': 'Monitor your temperature and rest.'
+                    'yes': {
+                        'follow_up': 'Have you experienced any body aches?',
+                        'follow_up_answers': {
+                            'yes': 'You might have the flu. Consider seeing a doctor.',
+                            'no': 'Monitor your temperature and rest.'
+                        }
+                    },
+                    'no': {
+                        'follow_up': 'Have you had any recent travel or exposure to sick individuals?',
+                        'follow_up_answers': {
+                            'yes': 'Consider consulting a healthcare professional.',
+                            'no': 'Keep monitoring your symptoms.'
+                        }
+                    }
+                }
+            }
+        ]
+    },
+    'cough': {
+        'questions': [
+            {
+                'question': 'Is it a dry cough?',
+                'answers': {
+                    'yes': {
+                        'follow_up': 'Do you have a sore throat?',
+                        'follow_up_answers': {
+                            'yes': 'Stay hydrated and consider throat lozenges.',
+                            'no': 'Monitor your symptoms and rest.'
+                        }
+                    },
+                    'no': {
+                        'follow_up': 'Are you experiencing shortness of breath?',
+                        'follow_up_answers': {
+                            'yes': 'Seek medical attention immediately.',
+                            'no': 'Stay hydrated and monitor your symptoms.'
+                        }
+                    }
                 }
             }
         ]
@@ -43,7 +90,9 @@ def questions(symptom):
     questions = symptoms_data[symptom]['questions']
     if request.method == 'POST':
         answer = request.form.get('answer')
-        return render_template('solution.html', solution=questions[0]['answers'][answer])
+        follow_up_question = questions[0]['answers'][answer]['follow_up']
+        follow_up_answers = questions[0]['answers'][answer]['follow_up_answers']
+        return render_template('follow_up.html', question=follow_up_question, answers=follow_up_answers)
 
     return render_template('questions.html', symptom=symptom, question=questions[0]['question'], answers=questions[0]['answers'].keys())
 
